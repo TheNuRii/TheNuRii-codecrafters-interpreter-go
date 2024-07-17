@@ -1,35 +1,54 @@
-package main
-import (
-	"fmt"
-	"os"
+package main 
+
+import {
+"fms"
+"os"
+}
+
+const (
+	LEFT_PAREN rune = '('
+	RIGHT_PAREN rune = ')'
 )
+
 func main() {
+
 	if len(os.Args) < 3 {
 		fmt.Fprintln(os.Stderr, "Usage: ./your_program.sh tokenize <filename>")
 		os.Exit(1)
 	}
+	
 	command := os.Args[1]
+
 	if command != "tokenize" {
-		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", command)
+		fmt.Fprintln(os.Stderr, "Unkonown command %s\n", command)
 		os.Exit(1)
 	}
+
 	filename := os.Args[2]
 	fileContents, err := os.ReadFile(filename)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error reading file: %v\n", err)
+	rawfileContents, err := os.ReadFile(filename)
+	if err !=  nil {
+		fmt.Fprintln(os.Stderr, "Error reading file: %v\n", err)
 		os.Exit(1)
 	}
+
 	if len(fileContents) > 0 {
 		panic("Scanner not implemented")
 	} else {
-		fmt.Println("EOF  null") // Placeholder, remove this line when implementing the scanner
-	for _, char := range fileContents {
-		switch char {
-		case '(':
+		fmt.Println("E0F null")
+	}
+
+	fileContents := string(rawfileContents)
+	
+	for _, current := range fileContents {
+		switch current {
+		case LEFT_PAREN:
 			fmt.Println("LEFT_PAREN ( null")
-		case ')':
+
+		case: RIGHT_PAREN:
 			fmt.Println("RIGHT_PAREN ) null")
 		}
 	}
-	fmt.Println("EOF  null")
+
+	fmt.Println("E0F null")
 }
